@@ -1,0 +1,30 @@
+name: SQL_injection
+description: |
+  This is a SQL_injection challenge. To complete these challenge, you should try to get some useful information from the databases throught the web page. Also, you may need to use some tools in your web browser or wireshark to capture some useful information in some http response.
+
+  **Connection Instructions**:
+  
+  Due to administrative and security reasons, a whole bunch of ports cannot be opened on swarm. So you connect to the SSH jump server on swarm with local port forwarding enabled. This allows you to forward a port from the client machine to the server machine, and hence connect to services which are hosted on the internal network. Exposing one SSH container to the Internet as a somewhat proxy server for other internal services is very commoly used, and the SSH server is known as the jump server or SSH Bastion.
+  
+  Do the following:
+
+  $ `ssh -L localhost:<local port>:haoyangma_ctf_python:5000 -p 56151 <username>@cs561.cs.umass.edu`
+
+  This starts an SSH session with the SSH server on swarm machine, and this server is connected to the internal network.
+  Now you can open a new terminal window on your machine, and connect to `localhost:<local port>` to access the challenge
+  
+  For example, run
+
+  $ `ssh -L localhost:5555:haoyangma_ctf_python:5000 -p -p 56151 user@cs561.cs.umass.edu`
+
+  This will forward the local port 5555 on your machine to `misc-free-points:54321` on the swarm network, where this challenge is hosted. The SSH server has been configured to give very restricted shell access (change your password and add an SSH key to ~/.ssh/authorized_keys), but can be used as a tunnel. You can read more about the SSH client by running `man ssh`
+  
+  Now, visit localhost:5555 through your browser and your are all set.
+
+
+value: 100
+category: Miscellaneous
+flag: flag{Happy_CTF_CS561}
+
+# administrative
+container_name: haoyangma_ctf_python
