@@ -10,7 +10,7 @@ services:
       mynet:
         ipv4_address: 172.18.0.3
     ports:
-    - 4306:33063
+    - 4306:3306
 
   ctf_python:
     container_name: haoyangma_ctf_python
