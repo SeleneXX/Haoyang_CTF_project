@@ -1,33 +1,16 @@
 version: "3.9"
 services:
-  ctf_mysql:
-    container_name: haoyangma_ctf_mysql
+  haoyang_ctf:
+    container_name: haoyangma_ctf
     build:
       context: .
       dockerfile: Dockerfile
-      target: mysql
+      target: haoyangma_ctf
     networks:
-      mynet:
-        ipv4_address: 172.18.0.3
-    ports:
-    - 4306:3306
-
-  ctf_python:
-    container_name: haoyangma_ctf_python
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: python
-    networks:
-      mynet:
-        ipv4_address: 172.18.0.2
+      nw0:
     ports:
     - 9500:5000
-
-  
 networks:
-  mynet:
-    ipam:
-      config:
-      - subnet: 172.18.0.0/24
+  nw0:
+    external: true
 

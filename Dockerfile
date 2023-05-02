@@ -1,8 +1,10 @@
-FROM python:3.10 AS python
 
-RUN pip install flask \
-    && pip install pymysql \
-    && pip install cryptography
+FROM ubuntu/mysql:latest as haoyangma_ctf
+
+ENV MYSQL_ALLOW_EMPTY_PASSWORD no
+ENV MYSQL_ROOT_PASSWORD=abc123456
+
+ADD init.sql /docker-entrypoint-initdb.d
 
 RUN mkdir /app
 
@@ -12,12 +14,9 @@ EXPOSE 5000
 
 WORKDIR /app
 
-CMD ["python", "CTF_project/ctf.pyc"]
+RUN apt-get update \
+    && apt-get install -y python3.10 python3-pip
 
-FROM mysql:latest AS mysql
-
-ENV MYSQL_ALLOW_EMPTY_PASSWORD no
-ENV MYSQL_ROOT_PASSWORD=abc123456
-
-WORKDIR /docker-entrypoint-initdb.d
-ADD init.sql .
+RUN pip install flask \
+    && pip install pymysql \
+    && pip install cryptography
