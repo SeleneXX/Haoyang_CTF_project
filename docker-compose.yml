@@ -10,6 +10,7 @@ services:
       nw0:
     ports:
     - 9500:5000
+    command: bash startup.sh
 networks:
   nw0:
     external: true
